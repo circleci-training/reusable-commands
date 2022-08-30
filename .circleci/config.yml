@@ -8,7 +8,7 @@ commands:
         type: string
         default: "https://www.circleci.com"
     steps:
-      - run: apt-get update && apt-get install iputils-ping
+      - run: sudo apt-get update && sudo apt-get install iputils-ping
       - run: ping << parameters.url >>
       
 jobs:
