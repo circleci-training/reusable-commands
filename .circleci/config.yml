@@ -8,7 +8,7 @@ commands:
         type: string
         default: "1.20.3-1ubuntu1"
     steps:
-      - run: sudo apt install -y wget=<< parameters.version >>
+      - run: sudo apt install -y wget=<< parameters.version >> --allow-downgrades
       
 jobs:
   test1:
