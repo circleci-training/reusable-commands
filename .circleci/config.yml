@@ -1,15 +1,15 @@
 version: 2.1
 
 commands:
-  ping-url:
-    description: "Ping a URL"
+  curl-url:
+    description: "CURL a URL"
     parameters:
       url:
         type: string
         default: "https://www.circleci.com"
     steps:
-      - run: sudo apt-get update && sudo apt-get install iputils-ping
-      - run: sudo ping << parameters.url >>
+      - run: apt-get update && apt-get install curl
+      - run: curl << parameters.url >>
       
 jobs:
   test1:
@@ -19,7 +19,7 @@ jobs:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     steps:
-      - ping-url:
+      - curl-url:
           url: "https://www.google.com"
     
   test2:
@@ -29,7 +29,7 @@ jobs:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     steps:
-      - ping-url
+      - curl-url
 
 workflows:
   testing:
