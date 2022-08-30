@@ -8,7 +8,7 @@ commands:
         type: string
         default: "https://www.circleci.com"
     steps:
-      - run: apt-get update && apt-get install curl
+      - run: sudo apt-get update && sudo apt-get install curl
       - run: curl << parameters.url >>
       
 jobs:
