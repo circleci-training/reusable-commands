@@ -13,7 +13,7 @@ commands:
 jobs:
   test1:
     docker:
-      - image: "cimg/base:stable"
+      - image: "cimg/deploy"
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
@@ -23,7 +23,7 @@ jobs:
     
   test2:
     docker:
-      - image: "cimg/base:stable"
+      - image: "cimg/deploy"
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
