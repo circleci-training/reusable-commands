@@ -1,0 +1,41 @@
+version: '2.1'
+
+commands:
+  install-wget:
+    description: "Install the wget client"
+    parameters:
+      version:
+        type: string
+        default: "1.20.3-1ubuntu1"
+    steps:
+      - run sudo apt install -y wget=<< parameters.version >>
+      
+jobs:
+  test1:
+    docker:
+      - image: "cimg/base:stable"
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - install-wget:
+          version: "1.17.0-1ubuntu1"
+      - run: wget --spider https://www.circleci.com
+    
+  test2:
+    docker:
+      - image: "cimg/base:stable"
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - install-wget
+      - run: wget --spider https://www.circleci.com
+
+workflows:
+  testing:
+    jobs:
+      - test1
+      - test2
