@@ -8,12 +8,13 @@ commands:
         type: string
         default: "https://www.circleci.com"
     steps:
+      - run: apt-get update && apt-get install iputils-ping
       - run: ping << parameters.url >>
       
 jobs:
   test1:
     docker:
-      - image: "cimg/deploy:2022.08"
+      - image: "cimg/base:stable"
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
@@ -23,7 +24,7 @@ jobs:
     
   test2:
     docker:
-      - image: "cimg/deploy:2022.08"
+      - image: "cimg/base:stable"
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
