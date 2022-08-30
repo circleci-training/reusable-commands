@@ -1,14 +1,14 @@
 version: 2.1
 
 commands:
-  install-wget:
-    description: "Install the wget client"
+  ping-url:
+    description: "Ping a URL"
     parameters:
-      version:
+      url:
         type: string
-        default: "1.20.3-1ubuntu1"
+        default: "https://www.circleci.com"
     steps:
-      - run: sudo apt install -y wget=<< parameters.version >> --allow-downgrades
+      - run: ping << parameters.url >>
       
 jobs:
   test1:
@@ -18,10 +18,8 @@ jobs:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     steps:
-      - checkout
-      - install-wget:
-          version: "1.21.3-1ubuntu1"
-      - run: wget --spider https://www.circleci.com
+      - ping-url:
+          url: "https://www.google.com"
     
   test2:
     docker:
@@ -30,9 +28,7 @@ jobs:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     steps:
-      - checkout
-      - install-wget
-      - run: wget --spider https://www.circleci.com
+      - ping-url
 
 workflows:
   testing:
